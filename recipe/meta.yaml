@@ -1,30 +1,39 @@
 {% set name = "types-PyYAML" %}
-{% set version = "6.0.12.5" %}
-
+{% set version = "6.0.12.12" %}
 
 package:
   name: {{ name|lower }}
   version: {{ version }}
 
+
 source:
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/types-PyYAML-{{ version }}.tar.gz
-  sha256: 3b61b7a8111ce368eb366e4a13f3e94e568bc2ed6227e01520a50ee07993bf38
+  sha256: 334373d392fde0fdf95af5c3f1661885fa10c52167b14593eb856289e1855062
+
 
 build:
   number: 0
-  noarch: python
-  script: {{ PYTHON }} -m pip install . -vv
+  script: {{ PYTHON }} -m pip install . --no-deps --no-build-isolation --ignore-installed --no-cache-dir -vv
+  skip: true  # [py<36]
 
 requirements:
   host:
     - pip
-    - python >=3.6
+    - python
+    - wheel
+    - setuptools
   run:
-    - python >=3.6
+    - python
+
 
 test:
+  imports:
+    - types
+  requires:
+    - pip
   commands:
-    - test -f $SP_DIR/yaml-stubs/__init__.pyi
+    - pip check
+    - test -f $SP_DIR/yaml-stubs/__init__.pyi  # [unix]
 
 
 about:
@@ -32,6 +41,14 @@ about:
   summary: Typing stubs for PyYAML
   license: Apache-2.0 AND MIT
   license_file: LICENSE
+  license_family: OTHER
+  description: |
+    This is a PEP 561 type stub package for the PyYaml package.
+    It can be used by type-checking tools like mypy, pyright, pytype,
+    PyCharm, etc. to check code that uses PyYaml.
+  dev_url: https://github.com/python/typeshed
+  doc_url: https://pyyaml.org/wiki/PyYAMLDocumentation
+
 
 extra:
   recipe-maintainers:
