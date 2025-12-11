@@ -34,9 +34,9 @@ test:
 about:
   home: https://github.com/python/typeshed
   summary: Typing stubs for PyYAML
-  license: Apache-2.0 AND MIT
+  license: Apache-2.0
   license_file: LICENSE
-  license_family: OTHER
+  license_family: APACHE
   description: |
     This is a PEP 561 type stub package for the PyYaml package.
     It can be used by type-checking tools like mypy, pyright, pytype,
