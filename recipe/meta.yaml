@@ -1,5 +1,5 @@
 {% set name = "types-PyYAML" %}
-{% set version = "6.0.12.20250915" %}
+{% set version = "6.0.12.20260815" %}
 
 package:
   name: {{ name|lower }}
@@ -7,18 +7,18 @@ package:
 
 source:
   url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/{{ name.replace('-','_') | lower }}-{{ version }}.tar.gz
-  sha256: 0f8b54a528c303f0e6f7165687dd33fafa81c807fcac23f632b63aa624ced1d3
+  sha256: 28764110c9cf35846e733da32d8d734df7473c5dde9ef67c3b7332ec0e819858
 
 build:
   number: 0
   script: {{ PYTHON }} -m pip install . --no-deps --no-build-isolation --ignore-installed --no-cache-dir -vv
-  skip: true  # [py<39]
+  skip: true  # [py<310]
 
 requirements:
   host:
     - pip
     - python
-    - setuptools >=77.0.3
+    - setuptools >=82.0.1
   run:
     - python
 
